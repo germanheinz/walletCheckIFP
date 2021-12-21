@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 const Swal = require('sweetalert2')
 
 const url = 'https://walletcheckifp.herokuapp.com';
-
+import 'regenerator-runtime/runtime'
 export const obtenerIngresosEgresos = async() => {
 
     console.log("aquiuiiii obtiene");

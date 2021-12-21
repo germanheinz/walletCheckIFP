@@ -1,5 +1,5 @@
 import '../css/componentes.css';
-// import '../css/style.css';
+import '../css/style.css';
 
 const Swal = require('sweetalert2')
 

@@ -1,6 +1,6 @@
 import '../css/componentes.css';
 import '../css/style.css';
-
+import 'regenerator-runtime/runtime'
 const Swal = require('sweetalert2')
 
 const url = 'https://walletcheckifp.herokuapp.com';

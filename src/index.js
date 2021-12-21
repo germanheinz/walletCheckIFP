@@ -3,6 +3,7 @@ import './css/style.css';
 
 import { login, register } from './js/http-provider';
 import { init, saveIngresoEgreso } from './js/ingresosEgresosList';
+import 'regenerator-runtime/runtime'
 
 require("babel-core/register");
 require("babel-polyfill");

@@ -1,6 +1,6 @@
 
 import { obtenerIngresosEgresos, createIngresosEgresos, getTime } from './http-provider';
-
+import 'regenerator-runtime/runtime'
 
 const body       = document.body;
 let ingresoTotal = 0;

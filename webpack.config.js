@@ -5,11 +5,10 @@ const CopyPlugin     = require("copy-webpack-plugin");
 module.exports = {
     
     mode: "development",
-
     output: {
         clean: true
     },
-
+    entry: ["regenerator-runtime/runtime.js", "<your enter js file>"],
     module: {
         rules: [
             {

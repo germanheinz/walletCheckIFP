@@ -4,6 +4,9 @@ import './css/style.css';
 import { login, register } from './js/http-provider';
 import { init, saveIngresoEgreso } from './js/ingresosEgresosList';
 
+require("babel-core/register");
+require("babel-polyfill");
+
 document.getElementById('container-scroller').style.display = 'none';
 document.getElementById('registerStyle').style.display = 'none';
 document.getElementById('details').style.display = 'none';

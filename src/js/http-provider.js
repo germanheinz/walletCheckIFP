@@ -7,8 +7,12 @@ const url = 'https://walletcheckifp.herokuapp.com';
 
 export const obtenerIngresosEgresos = async() => {
 
+    const userId = sessionStorage.getItem('userId');
+
+    console.log(userId);
+
     try {
-        const resp = await fetch(url + '/ingresosEgresos')
+        const resp = await fetch(url + `/ingresosEgresos/user/${userId}`)
 
         if(!resp.ok) throw 'no response'
 
@@ -55,10 +59,16 @@ export async function deleteIngresosEgresos(id) {
                 'Content-Type': 'application/json'
             }
         });
-        
-    console.log(resp);
+    const { ok } = resp;
+    if(ok){
+        Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+          )
+    }
     } catch (error) {
-        
+     console.log(error);   
     }
 }
 
@@ -102,6 +112,7 @@ export const login = async(email, password) => {
             'success'
           )
    
+        sessionStorage.setItem('userId', usuario._id);
         sessionStorage.setItem('email', usuario.email);
         sessionStorage.setItem('nombre', usuario.nombre);
 

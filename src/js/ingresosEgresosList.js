@@ -67,7 +67,7 @@ export const init = async() => {
 
     crearHtml();
 
-      totalEgresoIngreso();
+    totalEgresoIngreso();
 
     const ingresoEgresoList = await obtenerIngresosEgresos().then((response) => {
         const { ingresosEgresos } = response;
@@ -88,13 +88,14 @@ export const init = async() => {
 }
 
 export const saveIngresoEgreso = (title, description, price, date, ingresoEgreso) => {
-
+    const userId = sessionStorage.getItem('userId');
     createIngresosEgresos({
         title,
         price, 
         description,
         date,
-        role: ingresoEgreso
+        role: ingresoEgreso,
+        usuario: userId
     })
 
 }
@@ -105,8 +106,7 @@ export const addRowHandlers = () => {
     for (var i = 0; i < rows.length; i++) {
         rows[i].onclick = function(){ return function(){
                id = this.cells[0].innerHTML;
-            //    alert("id:" + id);
-                deleteIngresosEgresos(id); 
+                deleteIngresosEgresos(id);
         };}(rows[i]);
     }
 

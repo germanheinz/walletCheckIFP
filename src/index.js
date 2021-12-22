@@ -22,6 +22,7 @@ document.getElementById('cerrarSesion').addEventListener("click", function(event
 
     sessionStorage.removeItem('nombre');
     sessionStorage.removeItem('email');
+    sessionStorage.removeItem('userId');
 });
 
 document.getElementById('home').addEventListener("click", function(event){
@@ -95,7 +96,7 @@ document.getElementById("submit").addEventListener("click", function(event){
     console.log(ingresoEgreso);
     
     
-    saveIngresoEgreso(title, description, price, '' );
+    saveIngresoEgreso(title, description, price, '22/12/2021', ingresoEgreso);
 
 });
 

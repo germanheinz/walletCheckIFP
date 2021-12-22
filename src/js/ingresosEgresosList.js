@@ -18,30 +18,30 @@ const crearHtml = () => {
 
 const crearFilaIngresoEgreso = (ingresoEgreso) => {
 
+    const html = `
+    <td scope="col">1</td>
+    <td scope="col"> ${ingresoEgreso.title} </td>
+    <td scope="col"> ${ingresoEgreso.price} </td>
+    <td scope="col"> ${ingresoEgreso.date} </td>
+    `;
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = html;
+    
     if(ingresoEgreso.role == 'INGRESO'){
+        tr.className = 'table-success';
         ingresoTotal = parseInt(ingresoEgreso.price) + ingresoTotal;
     }
     if(ingresoEgreso.role == 'EGRESO'){
+        tr.className = 'table-danger';
         egresoTotal = parseInt(ingresoEgreso.price) + egresoTotal;
     }
-
-    console.log(ingresoTotal);
-
-    const html = `
-        <td scope="col">1</td>
-        <td scope="col"> ${ingresoEgreso.title} </td>
-        <td scope="col"> ${ingresoEgreso.price} </td>
-        <td scope="col"> ${ingresoEgreso.date} </td>
-    `;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = html;
-
+    
     tbody.appendChild(tr);
 
 }
 
-const totalEgreso = () =>  {
+export const totalEgresoIngreso = () =>  {
 
     const h3 = document.createElement('h3');
 
@@ -58,6 +58,10 @@ const totalEgreso = () =>  {
 
     h3E.innerHTML = h3Egreso;
     divEgresos.appendChild(h3E);
+
+       
+    console.log("ingresoTotal");
+    console.log(ingresoTotal);
 } 
 
 
@@ -65,14 +69,13 @@ export const init = async() => {
 
     crearHtml();
 
+      totalEgresoIngreso();
+
     const ingresoEgresoList = await obtenerIngresosEgresos().then((response) => {
         const { ingresosEgresos } = response;
         return ingresosEgresos;
     });
     ingresoEgresoList.forEach(crearFilaIngresoEgreso);
-    
-    totalIngreso();
-    totalEgreso();
 
     const divTotal = document.querySelector('div');
     body.appendChild( divTotal );
@@ -81,6 +84,11 @@ export const init = async() => {
     const divEgresos = document.querySelector('div');
     body.appendChild( divEgresos );
     tbodyEgresoTotal = document.querySelector('h3');
+
+
+    
+  
+ 
 
 
 }

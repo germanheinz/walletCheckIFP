@@ -7,7 +7,6 @@ const url = 'https://walletcheckifp.herokuapp.com';
 
 export const obtenerIngresosEgresos = async() => {
 
-    console.log("aquiuiiii obtiene");
     try {
         const resp = await fetch(url + '/ingresosEgresos')
 
@@ -87,6 +86,12 @@ export const login = async(email, password) => {
             throw ' no response';
         }
 
+        Swal.fire(
+            'Bienvenido!',
+            usuario.nombre,
+            'success'
+          )
+
         sessionStorage.setItem('email', usuario.email);
         sessionStorage.setItem('nombre', usuario.nombre);
 
@@ -119,7 +124,7 @@ export const register = async(email, nombre, password) => {
         if(resp.ok) {
             Swal.fire(
                 'Good job!',
-                'You clicked the button!',
+                usuario.nombre,
                 'success'
               )
 

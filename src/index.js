@@ -12,6 +12,17 @@ document.getElementById('container-scroller').style.display = 'none';
 document.getElementById('registerStyle').style.display = 'none';
 document.getElementById('details').style.display = 'none';
 
+
+document.getElementById('cerrarSesion').addEventListener("click", function(event){
+    document.getElementById('details').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('container-scroller').style.display = 'none';
+    document.getElementById('loginStyle').style.display = 'block';
+
+    sessionStorage.removeItem('nombre');
+    sessionStorage.removeItem('email');
+});
+
 document.getElementById('home').addEventListener("click", function(event){
     document.getElementById('details').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
@@ -47,6 +58,7 @@ document.getElementById("login").addEventListener("click", function(event){
     emailSide.innerHTML = emailSession;
 
     document.getElementById('registerStyle').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
 
    
 });

@@ -8,7 +8,7 @@ module.exports = {
     output: {
         clean: true
     },
-    entry: ["regenerator-runtime/runtime.js", "<your enter js file>"],
+    entry: ["regenerator-runtime/runtime.js", "./src/index.js"],
     module: {
         rules: [
             {

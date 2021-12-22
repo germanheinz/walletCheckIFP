@@ -176,7 +176,7 @@
 
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                  <i class="menu-icon fa fa-table"></i>
+                  <i class="menu-icon fas fa-sign-out-alt"></i>
                   <span class="menu-title" id="cerrarSesion">Cerrar sesión</span>
                   </a>
               </li>
@@ -241,13 +241,14 @@
                             <div class="card-body">
                             <h4 class="card-title">Detalle de ingreso egreso</h4>
                 
-                            <table class="table table-light table-borderless">
+                            <table class="table table-light table-borderless" id="tableIngresoEgreso">
                                 <thead>
                                 <tr style="border: none;">
                                     <th>Id</th>
                                     <th>Título</th>
                                     <th>Monto</th>
-                                    <th>Date</th>
+                                    <th>Fecha</th>
+                                    <th>Borrar</th>
                                 </tr>
                                 </thead>
                 
@@ -282,7 +283,7 @@
                     <option selected value="ingreso">Ingreso</option>
                     <option value="egreso">Egreso</option>
                 </select>
-                <button class="btn btn-primary" style="margin-top: 36px; width: 100%;" id="submit">Crear</button>
+                <button class="btn btn-success" style="margin-top: 36px; width: 100%;" id="submit">Crear</button>
               </form>
         </div>
         </div>

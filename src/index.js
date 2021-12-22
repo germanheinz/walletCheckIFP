@@ -8,6 +8,7 @@ import 'regenerator-runtime/runtime'
 require("babel-core/register");
 require("babel-polyfill");
 
+
 document.getElementById('container-scroller').style.display = 'none';
 document.getElementById('registerStyle').style.display = 'none';
 document.getElementById('details').style.display = 'none';
@@ -17,7 +18,7 @@ document.getElementById('cerrarSesion').addEventListener("click", function(event
     document.getElementById('details').style.display = 'none';
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('container-scroller').style.display = 'none';
-    document.getElementById('loginStyle').style.display = 'block';
+    document.getElementById('loginStyle').style.display = '';
 
     sessionStorage.removeItem('nombre');
     sessionStorage.removeItem('email');
@@ -46,6 +47,7 @@ document.getElementById("login").addEventListener("click", function(event){
         email,
         password
     )
+    init();
 
     var nombreSession = sessionStorage.getItem('nombre');
     var emailSession = sessionStorage.getItem('email');
@@ -60,7 +62,6 @@ document.getElementById("login").addEventListener("click", function(event){
     document.getElementById('registerStyle').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
 
-   
 });
 
 document.getElementById("registerId").addEventListener("click", function(event){
@@ -101,11 +102,10 @@ document.getElementById("submit").addEventListener("click", function(event){
 
 document.getElementById('registerBtn').addEventListener("click", function(event){
     document.getElementById('loginStyle').style.display = 'none';
-    document.getElementById('registerStyle').style.display = 'block';
+    document.getElementById('registerStyle').style.display = '';
 });
 document.getElementById('loginBtn').addEventListener("click", function(event){
-    document.getElementById('loginStyle').style.display = 'block';
+    document.getElementById('loginStyle').style.display = '';
     document.getElementById('registerStyle').style.display = 'none';
 });
 
-init();

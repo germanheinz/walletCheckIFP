@@ -14,6 +14,8 @@ export const obtenerIngresosEgresos = async() => {
 
         const ingresosEgresos = resp.json();
 
+        console.log(ingresosEgresos);
+
         return ingresosEgresos;
 
     } catch (error) {
@@ -41,18 +43,26 @@ export const createIngresosEgresos = async(ingresoEgreso) => {
         }
 
     } catch (error) {
-        
+        console.log(error);
     }
 }
 
-const deleteIngresosEgresos = async() => {
+export async function deleteIngresosEgresos(id) {
     try {
-        const resp = await fetch(url + '/ingresosEgresos')
-
+        const resp = await fetch(url + `/ingresoEgreso/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+    console.log(resp);
     } catch (error) {
         
     }
 }
+
+
 const updateIngresosEgresos = async() => {
     try {
         const resp = await fetch(url + '/ingresosEgresos')
@@ -91,7 +101,7 @@ export const login = async(email, password) => {
             usuario.nombre,
             'success'
           )
-
+   
         sessionStorage.setItem('email', usuario.email);
         sessionStorage.setItem('nombre', usuario.nombre);
 

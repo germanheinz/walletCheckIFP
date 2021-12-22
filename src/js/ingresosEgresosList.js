@@ -1,5 +1,5 @@
 
-import { obtenerIngresosEgresos, createIngresosEgresos, getTime } from './http-provider';
+import { obtenerIngresosEgresos, createIngresosEgresos, deleteIngresosEgresos, getTime } from './http-provider';
 import 'regenerator-runtime/runtime'
 
 const body       = document.body;
@@ -19,10 +19,11 @@ const crearHtml = () => {
 const crearFilaIngresoEgreso = (ingresoEgreso) => {
 
     const html = `
-    <td scope="col">1</td>
+    <td scope="col"> ${ingresoEgreso._id}    </td>
     <td scope="col"> ${ingresoEgreso.title} </td>
     <td scope="col"> ${ingresoEgreso.price} </td>
-    <td scope="col"> ${ingresoEgreso.date} </td>
+    <td scope="col"> ${ingresoEgreso.date}  </td>
+    <td scope="col" id="deleteItem" style="text-align: center; color:#e15151;"><i class="fas fa-trash"></i></td>
     `;
     
     const tr = document.createElement('tr');
@@ -58,10 +59,7 @@ export const totalEgresoIngreso = () =>  {
 
     h3E.innerHTML = h3Egreso;
     divEgresos.appendChild(h3E);
-
-       
-    console.log("ingresoTotal");
-    console.log(ingresoTotal);
+  
 } 
 
 
@@ -77,19 +75,15 @@ export const init = async() => {
     });
     ingresoEgresoList.forEach(crearFilaIngresoEgreso);
 
+    addRowHandlers();
+
     const divTotal = document.querySelector('div');
     body.appendChild( divTotal );
-    tbodyingresoTotal = document.querySelector('h3');
+    // tbodyingresoTotal = document.querySelector('h3');
 
     const divEgresos = document.querySelector('div');
     body.appendChild( divEgresos );
-    tbodyEgresoTotal = document.querySelector('h3');
-
-
-    
-  
- 
-
+    // tbodyEgresoTotal = document.querySelector('h3');
 
 }
 
@@ -105,3 +99,16 @@ export const saveIngresoEgreso = (title, description, price, date, ingresoEgreso
 
 }
 
+export const addRowHandlers = () => {
+    var rows = document.getElementById("tableIngresoEgreso").rows;
+    var id = '';
+    for (var i = 0; i < rows.length; i++) {
+        rows[i].onclick = function(){ return function(){
+               id = this.cells[0].innerHTML;
+            //    alert("id:" + id);
+                deleteIngresosEgresos(id); 
+        };}(rows[i]);
+    }
+
+   
+}

@@ -3,8 +3,8 @@ import { obtenerIngresosEgresos, createIngresosEgresos, deleteIngresosEgresos, g
 import 'regenerator-runtime/runtime'
 
 const body       = document.body;
-let ingresoTotal = 0;
-let egresoTotal  = 0;
+var ingresoTotal= 0;
+var egresoTotal = 0;
 let tbody;
 
 const crearHtml = () => {
@@ -19,25 +19,41 @@ const crearHtml = () => {
 const crearFilaIngresoEgreso = (ingresoEgreso) => {
 
     const html = `
-    <td scope="col"> ${ingresoEgreso._id}    </td>
-    <td scope="col"> ${ingresoEgreso.title} </td>
-    <td scope="col"> ${ingresoEgreso.price} </td>
-    <td scope="col"> ${ingresoEgreso.date}  </td>
+    <td scope="col" class="rowIngresoE"> ${ingresoEgreso._id}    </td>
+    <td scope="col" class="rowIngresoE"> ${ingresoEgreso.title} </td>
+    <td scope="col" class="rowIngresoE"> ${ingresoEgreso.price} </td>
+    <td scope="col" class="rowIngresoE" class="text-success"> ${ingresoEgreso.date}  </td>
     <td scope="col" id="deleteItem" style="text-align: center; color:#e15151;"><i class="fas fa-trash"></i></td>
     `;
     
     const tr = document.createElement('tr');
+    const td = document.getElementsByClassName('rowIngresoE');
     tr.innerHTML = html;
+
+    console.log(td);
     
     if(ingresoEgreso.role == 'INGRESO'){
-        tr.className = 'table-success';
+        td.className = 'green';
+
+        var tds = tr.getElementsByTagName("td");
+
+        for(var i = 0; i < tds.length; i++) {
+            tds[i].style.color="green";
+        }
+
         ingresoTotal = parseInt(ingresoEgreso.price) + ingresoTotal;
     }
     if(ingresoEgreso.role == 'EGRESO'){
-        tr.className = 'table-danger';
+
+        var tds = tr.getElementsByTagName("td");
+
+        for(var i = 0; i < tds.length; i++) {
+            tds[i].style.color="red";
+        }
         egresoTotal = parseInt(ingresoEgreso.price) + egresoTotal;
     }
-    
+    console.log(ingresoTotal);
+    console.log(egresoTotal);
     tbody.appendChild(tr);
 
 }
@@ -46,6 +62,10 @@ export const totalEgresoIngreso = () =>  {
 
     const h3 = document.createElement('h3');
 
+    // ingresoTotal = 10;
+    // egresoTotal = 10;
+    console.log(ingresoTotal);
+    console.log(egresoTotal);
     const h3Ingreso = `
     <h3 class='font-weight-medium text-right mb-0' id='ingresoTotal'>$${ingresoTotal}</h3>`;
 
@@ -67,8 +87,6 @@ export const init = async() => {
 
     crearHtml();
 
-    totalEgresoIngreso();
-
     const ingresoEgresoList = await obtenerIngresosEgresos().then((response) => {
         const { ingresosEgresos } = response;
         return ingresosEgresos;
@@ -79,11 +97,13 @@ export const init = async() => {
 
     const divTotal = document.querySelector('div');
     body.appendChild( divTotal );
-    // tbodyingresoTotal = document.querySelector('h3');
+    var tbodyingresoTotal = document.createElement('h3');
 
     const divEgresos = document.querySelector('div');
     body.appendChild( divEgresos );
-    // tbodyEgresoTotal = document.querySelector('h3');
+    var tbodyEgresoTotal = document.querySelector('h3');
+
+    totalEgresoIngreso();
 
 }
 

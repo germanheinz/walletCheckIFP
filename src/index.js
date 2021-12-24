@@ -3,6 +3,7 @@ import './css/style.css';
 
 import { login, register } from './js/http-provider';
 import { init, saveIngresoEgreso } from './js/ingresosEgresosList';
+import { obtenerIngresosEgresos } from './js/http-provider';
 import 'regenerator-runtime/runtime'
 
 require("babel-core/register");
@@ -28,11 +29,13 @@ document.getElementById('cerrarSesion').addEventListener("click", function(event
 document.getElementById('home').addEventListener("click", function(event){
     document.getElementById('details').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
+    obtenerIngresosEgresos();
 });
 
 document.getElementById('createEdit').addEventListener("click", function(event){
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('details').style.display = 'block';
+
 });
 
 document.getElementById("login").addEventListener("click", function(event){

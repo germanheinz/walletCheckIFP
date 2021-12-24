@@ -3,7 +3,8 @@ import '../css/style.css';
 import 'regenerator-runtime/runtime';
 const Swal = require('sweetalert2')
 
-const url = 'https://walletcheckifp.herokuapp.com';
+// const url = 'https://walletcheckifp.herokuapp.com';
+const url = 'http://localhost:3000';
 
 export const obtenerIngresosEgresos = async() => {
 

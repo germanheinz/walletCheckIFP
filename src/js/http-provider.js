@@ -52,10 +52,14 @@ export const createIngresosEgresos = async(ingresoEgreso) => {
     }
 }
 
-export async function deleteIngresosEgresos(id) {
+export const deleteIngresosEgresos = async(id) => {
+
+    console.log(id);
+    const idToRemove = id.trim()
     try {
-        const resp = await fetch(url + `/ingresoEgreso/${id}`, {
+        const resp = await fetch(url + `/ingresoEgreso/delete`, {
             method: 'DELETE',
+            body: `{"idToRemove": "${idToRemove}"}`,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -64,10 +68,11 @@ export async function deleteIngresosEgresos(id) {
     if(ok){
         Swal.fire(
             'Good job!',
-            'You clicked the button!',
+            id,
             'success'
           )
     }
+    return ok;
     } catch (error) {
      console.log(error);   
     }
@@ -96,6 +101,7 @@ export const login = async(email, password) => {
         });
 
         const {usuario} = await resp.json();
+        console.log(usuario);
 
         if(!resp.ok) {
             Swal.fire({

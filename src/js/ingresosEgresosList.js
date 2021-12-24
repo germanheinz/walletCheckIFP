@@ -29,8 +29,6 @@ const crearFilaIngresoEgreso = (ingresoEgreso) => {
     const tr = document.createElement('tr');
     const td = document.getElementsByClassName('rowIngresoE');
     tr.innerHTML = html;
-
-    console.log(td);
     
     if(ingresoEgreso.role == 'INGRESO'){
         td.className = 'green';
@@ -52,8 +50,7 @@ const crearFilaIngresoEgreso = (ingresoEgreso) => {
         }
         egresoTotal = parseInt(ingresoEgreso.price) + egresoTotal;
     }
-    console.log(ingresoTotal);
-    console.log(egresoTotal);
+
     tbody.appendChild(tr);
 
 }
@@ -62,8 +59,6 @@ export const totalEgresoIngreso = () =>  {
 
     const h3 = document.createElement('h3');
 
-    // ingresoTotal = 10;
-    // egresoTotal = 10;
     console.log(ingresoTotal);
     console.log(egresoTotal);
     const h3Ingreso = `
@@ -93,17 +88,18 @@ export const init = async() => {
     });
     ingresoEgresoList.forEach(crearFilaIngresoEgreso);
 
-    addRowHandlers();
+  
 
     const divTotal = document.querySelector('div');
     body.appendChild( divTotal );
-    var tbodyingresoTotal = document.createElement('h3');
+    // var tbodyingresoTotal = document.createElement('h3');
 
     const divEgresos = document.querySelector('div');
     body.appendChild( divEgresos );
-    var tbodyEgresoTotal = document.querySelector('h3');
+    // var tbodyEgresoTotal = document.querySelector('h3');
 
     totalEgresoIngreso();
+    addRowHandlers();
 
 }
 
@@ -126,6 +122,7 @@ export const addRowHandlers = () => {
     for (var i = 0; i < rows.length; i++) {
         rows[i].onclick = function(){ return function(){
                id = this.cells[0].innerHTML;
+               const idToRemove = sessionStorage.setItem('idToRemove', id);
                 deleteIngresosEgresos(id);
         };}(rows[i]);
     }

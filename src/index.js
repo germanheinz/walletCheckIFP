@@ -51,10 +51,12 @@ document.getElementById("login").addEventListener("click", function(event){
         email,
         password
     )
-    init();
+
 
     var nombreSession = sessionStorage.getItem('nombre');
     var emailSession = sessionStorage.getItem('email');
+
+    init();
 
     const nombreSide = document.getElementById("nombreSideBar");
     nombreSide.innerHTML = nombreSession;

@@ -62,9 +62,27 @@ const crearFilaIngresoEgreso = (ingresoEgreso) => {
         egresoTotal = parseInt(ingresoEgreso.price) + egresoTotal;
     }
 
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
     tbody.appendChild(tr);
 
 }
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Ingresos / Egresos'],
+      ['Egresos',     egresoTotal],
+      ['Ingresos',      ingresoTotal],
+    ]);
+
+    var options = {
+      title: 'My Daily Activities',
+      is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
 
 export const totalEgresoIngreso = () =>  {
 

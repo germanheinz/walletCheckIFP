@@ -19,8 +19,7 @@ export const borrarHtml = () => {
     $("#egresoTotal").remove();
     ingresoTotal = 0;
     egresoTotal = 0;
-    init();
-    test();
+    
 
 } 
 

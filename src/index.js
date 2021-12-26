@@ -1,5 +1,7 @@
 import './styles.css';
 import './css/style.css';
+import $ from 'jquery';
+
 
 import { login, register } from './js/http-provider';
 import { init, saveIngresoEgreso, test, borrarHtml } from './js/ingresosEgresosList';
@@ -26,13 +28,16 @@ document.getElementById('cerrarSesion').addEventListener("click", function(event
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('userId');
     localStorage.removeItem('ingresosEgresos');
+    sessionStorage.clear();
+    localStorage.clear();
 });
 
 document.getElementById('home').addEventListener("click", function(event){
     document.getElementById('details').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     borrarHtml();
-    
+    init();
+    test();
 });
 
 document.getElementById('createEdit').addEventListener("click", function(event){

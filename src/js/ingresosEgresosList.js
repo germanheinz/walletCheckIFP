@@ -1,5 +1,6 @@
 
 import { obtenerIngresosEgresos, createIngresosEgresos, deleteIngresosEgresos, getTime } from './http-provider';
+// import {cargarLocalStorage, guardarLocalStorage, IngresoEgresoList} from './IngresoEgresoList';
 import 'regenerator-runtime/runtime'
 
 const body       = document.body;
@@ -9,12 +10,20 @@ let tbody;
 
 const crearHtml = () => {
     
-    const div = document.createElement('div');
-    body.appendChild( div );
     tbody = document.querySelector('tbody');
-    
 
 }
+export const borrarHtml = () => {
+    
+    $("#ingresoTotal").remove();
+    $("#egresoTotal").remove();
+    ingresoTotal = 0;
+    egresoTotal = 0;
+    init();
+    test();
+
+} 
+
 
 const crearFilaIngresoEgreso = (ingresoEgreso) => {
 
@@ -23,10 +32,11 @@ const crearFilaIngresoEgreso = (ingresoEgreso) => {
     <td scope="col" class="rowIngresoE"> ${ingresoEgreso.title} </td>
     <td scope="col" class="rowIngresoE"> ${ingresoEgreso.price} </td>
     <td scope="col" class="rowIngresoE" class="text-success"> ${ingresoEgreso.date}  </td>
-    <td scope="col" id="deleteItem" style="text-align: center; color:#e15151;"><i class="fas fa-trash"></i></td>
+    <td scope="col" class="trashClass" id="deleteItem" style="text-align: center; color:#e15151;"><i class="fas fa-trash"></i></td>
     `;
     
     const tr = document.createElement('tr');
+    tr.id = 'someId';
     const td = document.getElementsByClassName('rowIngresoE');
     tr.innerHTML = html;
     
@@ -38,8 +48,9 @@ const crearFilaIngresoEgreso = (ingresoEgreso) => {
         for(var i = 0; i < tds.length; i++) {
             tds[i].style.color="green";
         }
-
+        console.log(ingresoEgreso.price);
         ingresoTotal = parseInt(ingresoEgreso.price) + ingresoTotal;
+        console.log(ingresoTotal);
     }
     if(ingresoEgreso.role == 'EGRESO'){
 
@@ -59,8 +70,6 @@ export const totalEgresoIngreso = () =>  {
 
     const h3 = document.createElement('h3');
 
-    console.log(ingresoTotal);
-    console.log(egresoTotal);
     const h3Ingreso = `
     <h3 class='font-weight-medium text-right mb-0' id='ingresoTotal'>$${ingresoTotal}</h3>`;
 
@@ -82,25 +91,25 @@ export const init = async() => {
 
     crearHtml();
 
+    const divTotal = document.querySelector('div');
+    body.appendChild( divTotal );
+
+    const divEgresos = document.querySelector('div');
+    body.appendChild( divEgresos );
+}
+
+export const test = async() => {
     const ingresoEgresoList = await obtenerIngresosEgresos().then((response) => {
         const { ingresosEgresos } = response;
         return ingresosEgresos;
     });
-    ingresoEgresoList.forEach(crearFilaIngresoEgreso);
 
-  
+    localStorage.setItem('ingresosEgresos', JSON.stringify(ingresoEgresoList));
+    var listIngresoEgreso = localStorage.getItem('ingresosEgresos');
 
-    const divTotal = document.querySelector('div');
-    body.appendChild( divTotal );
-    // var tbodyingresoTotal = document.createElement('h3');
-
-    const divEgresos = document.querySelector('div');
-    body.appendChild( divEgresos );
-    // var tbodyEgresoTotal = document.querySelector('h3');
-
-    totalEgresoIngreso();
+    JSON.parse(listIngresoEgreso).forEach(crearFilaIngresoEgreso);
     addRowHandlers();
-
+    totalEgresoIngreso();
 }
 
 export const saveIngresoEgreso = (title, description, price, date, ingresoEgreso) => {
@@ -113,6 +122,7 @@ export const saveIngresoEgreso = (title, description, price, date, ingresoEgreso
         role: ingresoEgreso,
         usuario: userId
     })
+    
 
 }
 
@@ -123,7 +133,18 @@ export const addRowHandlers = () => {
         rows[i].onclick = function(){ return function(){
                id = this.cells[0].innerHTML;
                const idToRemove = sessionStorage.setItem('idToRemove', id);
-                deleteIngresosEgresos(id);
+               console.log(id);
+
+               localStorage.removeItem('_id', id);
+               deleteIngresosEgresos(id);
+                $(".tt").empty();
+                $("#ingresoTotal").remove();
+                $("#egresoTotal").remove();
+                ingresoTotal = 0;
+                egresoTotal = 0;
+                init();
+                test();
+
         };}(rows[i]);
     }
 

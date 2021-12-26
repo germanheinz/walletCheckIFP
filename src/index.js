@@ -2,9 +2,10 @@ import './styles.css';
 import './css/style.css';
 
 import { login, register } from './js/http-provider';
-import { init, saveIngresoEgreso } from './js/ingresosEgresosList';
+import { init, saveIngresoEgreso, test, borrarHtml } from './js/ingresosEgresosList';
 import { obtenerIngresosEgresos } from './js/http-provider';
 import 'regenerator-runtime/runtime'
+
 
 require("babel-core/register");
 require("babel-polyfill");
@@ -29,7 +30,8 @@ document.getElementById('cerrarSesion').addEventListener("click", function(event
 document.getElementById('home').addEventListener("click", function(event){
     document.getElementById('details').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
-    obtenerIngresosEgresos();
+    borrarHtml();
+    
 });
 
 document.getElementById('createEdit').addEventListener("click", function(event){
@@ -57,6 +59,7 @@ document.getElementById("login").addEventListener("click", function(event){
     var emailSession = sessionStorage.getItem('email');
 
     init();
+    test();
 
     const nombreSide = document.getElementById("nombreSideBar");
     nombreSide.innerHTML = nombreSession;
@@ -95,13 +98,15 @@ document.getElementById("submit").addEventListener("click", function(event){
     let price       = document.getElementById("myForm").elements[1].value;
     let description = document.getElementById("myForm").elements[2].value;
     let ingresoEgreso  = document.getElementById("myForm").elements[3].value;
+    let fecha  = document.getElementById("myForm").elements[4].value;
     console.log(title);
     console.log(price);
     console.log(description);
     console.log(ingresoEgreso);
+    console.log(fecha);
     
     
-    saveIngresoEgreso(title, description, price, '22/12/2021', ingresoEgreso);
+    saveIngresoEgreso(title, description, price, fecha, ingresoEgreso);
 
 });
 
@@ -114,4 +119,5 @@ document.getElementById('loginBtn').addEventListener("click", function(event){
     document.getElementById('loginStyle').style.display = '';
     document.getElementById('registerStyle').style.display = 'none';
 });
+
 

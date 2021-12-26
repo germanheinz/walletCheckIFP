@@ -25,6 +25,7 @@ document.getElementById('cerrarSesion').addEventListener("click", function(event
     sessionStorage.removeItem('nombre');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('userId');
+    localStorage.removeItem('ingresosEgresos');
 });
 
 document.getElementById('home').addEventListener("click", function(event){

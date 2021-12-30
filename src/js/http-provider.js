@@ -19,7 +19,7 @@ export const obtenerIngresosEgresos = async() => {
 
         const ingresosEgresos = resp.json();
 
-        localStorage.setItem('ingresosEgresos', ingresosEgresos);
+        // localStorage.setItem('ingresosEgresos', ingresosEgresos);
         console.log(ingresosEgresos);
 
         return ingresosEgresos;

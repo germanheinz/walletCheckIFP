@@ -121,8 +121,8 @@ export const test = async() => {
         return ingresosEgresos;
     });
 
-    localStorage.setItem('ingresosEgresos', JSON.stringify(ingresoEgresoList));
-    var listIngresoEgreso = localStorage.getItem('ingresosEgresos');
+    // localStorage.setItem('ingresosEgresos', JSON.stringify(ingresoEgresoList));
+    // var listIngresoEgreso = localStorage.getItem('ingresosEgresos');
 
     ingresoEgresoList.forEach(crearFilaIngresoEgreso);
     addRowHandlers();
